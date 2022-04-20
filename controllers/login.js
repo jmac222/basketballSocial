@@ -8,8 +8,12 @@ const addLogin = async (req, res) => {
       "Origin, X-Requested-With, Content-Type, Accept"
     );
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-    const login = new Login.create(req.body)
-    res.status(200).json({login})
+
+    const login = new Login({...req.body})
+
+    const data = await login.save()
+    // const login = new Login.create(req.body)
+    res.status(200).json({...data})
 }
 
 
